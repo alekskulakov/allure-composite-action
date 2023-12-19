@@ -20,6 +20,12 @@ inputs:
     description: 'Command for run tests'
     required: true
     default: 'dotnet test'
+  allure_endpoint:
+    description: 'Allure endpoint'
+    required: true
+  allure_token:
+    description: 'Allure token'
+    required: true
 runs:
   using: "composite"
   steps:
@@ -27,8 +33,8 @@ runs:
       if: ${{ inputs.install }}
       uses: allure-framework/setup-allurectl@v1.0.0
       with:
-        allure-endpoint: ${{ secrets.ALLURE_ENDPOINT }}
-        allure-token: ${{ secrets.ALLURE_TOKEN }}
+        allure-endpoint: ${{ inputs.allure_endpoint }}
+        allure-token: ${{ inputs.allure_token }}
         allure-project-id: ${{ inputs.allure-project-id }}
         allurectl-version: 2.14.2
     - name: run tests
