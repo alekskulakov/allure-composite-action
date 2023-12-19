@@ -1,0 +1,36 @@
+﻿name: 'Run watch'
+description: 'Run watch command'
+inputs:
+  install:
+    description: 'If allurectl installation is needed'
+    required: false
+    default: 'false'
+  allure-project-id:
+    description: 'Allure project id'
+    required: true
+  working-directory:
+      description: 'Working directory path'
+      required: false
+      default: ''
+  results:
+    description: 'Results folder'
+    required: true
+    default: ''
+  command:
+    description: 'Command for run tests'
+    required: true
+    default: 'dotnet test'
+runs:
+  using: "composite"
+  steps:
+    - name: Setup Allure TestOps
+      uses: allure-framework/setup-allurectl@v1.0.0
+      with:
+        allure-endpoint: ${{ secrets.ALLURE_ENDPOINT }}
+        allure-token: ${{ secrets.ALLURE_TOKEN }}
+        allure-project-id: ${{ inputs.allure-project-id }}
+        allurectl-version: 2.14.2
+    - name: run tests
+      shell: bash
+      working-directory: ${{ inputs.working-directory }}
+      run: allurectl watch --silent --ignore-passed-test-attachments --results ${{ inputs.results }} -- ${{ inputs.command }}
