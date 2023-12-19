@@ -24,6 +24,7 @@ runs:
   using: "composite"
   steps:
     - name: Setup Allure TestOps
+      if: ${{ inputs.install }}
       uses: allure-framework/setup-allurectl@v1.0.0
       with:
         allure-endpoint: ${{ secrets.ALLURE_ENDPOINT }}
