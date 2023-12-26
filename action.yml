@@ -45,3 +45,16 @@ runs:
       shell: bash
       working-directory: ${{ inputs.working-directory }}
       run: allurectl watch --silent --ignore-passed-test-attachments --results ${{ inputs.results }} -- ${{ inputs.command }}
+
+    - name: show github_output before
+      shell: bash
+      run: echo "The selected color is ${{ steps.color.outputs.allure_url }}"
+      
+    - name: set output
+      shell: bash
+      id: color
+      run: |
+        echo "allure_url=https:// ${{ matrix.version }}" >> "$GITHUB_OUTPUT"
+    - name: show github_output after
+      shell: bash
+      run: echo "The selected color is ${{ steps.color.outputs.allure_url }}"
