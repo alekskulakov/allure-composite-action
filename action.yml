@@ -2,7 +2,7 @@
 description: 'Run watch command'
 inputs:
   install:
-    description: 'If allurectl installation is needed'
+    description: 'If allurectl installation is needed '
     required: false
     default: 'false'
   allure-project-id:
