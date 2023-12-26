@@ -24,7 +24,7 @@ inputs:
     description: 'Allure endpoint'
     required: true
   allure-token:
-    description: 'Allure token'
+    description: 'Allure token '
     required: true
   allurectl-version:
     description: 'Allurectl version'
